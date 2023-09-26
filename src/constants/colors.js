@@ -1,0 +1,1 @@
+export const COLOR_FLOATING_ACTION = '#2196F3';
