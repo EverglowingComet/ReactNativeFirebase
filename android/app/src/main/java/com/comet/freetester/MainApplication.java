@@ -1,4 +1,4 @@
-package com.reactnativefirebase;
+package com.comet.freetester;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
