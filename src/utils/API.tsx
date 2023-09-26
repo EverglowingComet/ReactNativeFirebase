@@ -46,9 +46,9 @@ export const listenDb = (path: string, onChange: (dict: any) => void) => {
 export const readDb = (
   path: string,
   onChange: (dict: any) => void,
-  onFailure?: (error: string) => void,
+  onFailure?: (error: any) => void,
 ) => {
-  database()
+  return database()
     .ref(path)
     .once('value')
     .then(snapshot => {
@@ -66,21 +66,20 @@ export const readDb = (
 export const writeDb = (
   path: string,
   data: any | null,
-  onSuccess?: () => void,
-  onFailure?: (error: string) => void,
+  onFinished?: (error?: any) => void,
 ) => {
-  database()
+  return database()
     .ref(path)
     .set(data)
     .then(() => {
-      if (onSuccess) {
-        onSuccess();
+      if (onFinished) {
+        onFinished(undefined);
       }
     })
     .catch(error => {
       console.log('Reading Db Error', error);
-      if (onFailure) {
-        onFailure(error);
+      if (onFinished) {
+        onFinished(error);
       }
     });
 };

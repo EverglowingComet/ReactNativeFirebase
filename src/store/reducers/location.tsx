@@ -5,6 +5,7 @@ type LocationState = {
   ref?: number;
   locationArray: any[];
   tracking: boolean;
+  authorized: boolean;
 };
 
 const initialState: LocationState = {
@@ -12,6 +13,7 @@ const initialState: LocationState = {
   ref: undefined,
   locationArray: [],
   tracking: false,
+  authorized: false,
 };
 
 export const locationSlice = createSlice({
@@ -20,6 +22,9 @@ export const locationSlice = createSlice({
   reducers: {
     setReference: (state, action) => {
       state.ref = action.payload;
+    },
+    setAuthorized: (state, action) => {
+      state.authorized = action.payload;
     },
     setTracking: (state, action) => {
       state.tracking = action.payload;
@@ -38,6 +43,7 @@ export const locationSlice = createSlice({
 
 export const {
   setReference,
+  setAuthorized,
   setTracking,
   setCurrentLocation,
   initLocationArray,

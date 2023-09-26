@@ -64,3 +64,7 @@ yarn-error.log
 
 # testing
 /coverage
+
+#google key files
+/android/app/google-services.json
+/ios/ReactNativeFirebase/GoogleService-Info.plist
