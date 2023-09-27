@@ -23,47 +23,65 @@ function checkAuth(userId: string) {
   };
 }
 
-function register(data: {email: string; username: string; password: string}) {
+function register(data: {
+  email: string;
+  username: string;
+  password: string;
+  callback: (error?: any) => void;
+}) {
   return (dispatch: Dispatch) => {
     dispatch(setLoggingIn(true));
     userServices
       .register(data)
       .then(user => {
         dispatch(setUser(user));
+        data.callback();
         dispatch(setLoggingIn(false));
       })
-      .catch(() => {
+      .catch((error: any) => {
+        data.callback(error);
         dispatch(setUser(undefined));
         dispatch(setLoggingIn(false));
       });
   };
 }
 
-function login(data: {email: string; password: string}) {
+function login(data: {
+  email: string;
+  password: string;
+  callback: (error?: any) => void;
+}) {
   return (dispatch: Dispatch) => {
     dispatch(setLoggingIn(true));
     userServices
       .login(data)
       .then(user => {
         dispatch(setUser(user));
+        data.callback();
         dispatch(setLoggingIn(false));
       })
-      .catch(() => {
+      .catch((error: any) => {
+        data.callback(error);
         dispatch(setUser(undefined));
         dispatch(setLoggingIn(false));
       });
   };
 }
 
-function sendResetEmail(data: {email: string}) {
+function sendResetEmail(data: {
+  email: string;
+  callback: (error?: any) => void;
+}) {
   return (dispatch: Dispatch) => {
     dispatch(setLoggingIn(true));
     userServices
       .sendResetEmail(data)
       .then(() => {
+        data.callback();
         dispatch(setLoggingIn(false));
       })
-      .catch(() => {
+      .catch((error: any) => {
+        data.callback(error);
         dispatch(setLoggingIn(false));
       });
   };

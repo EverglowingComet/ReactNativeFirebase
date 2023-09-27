@@ -1,0 +1,16 @@
+{
+  "app_name": "Free Tester",
+  "username": "Username",
+  "email": "Email",
+  "password": "Password",
+  "input_username_prompt": "You should input valid username",
+  "input_email_prompt": "You should input valid email address",
+  "input_password_prompt": "You should input valid password",
+  "retype_password": "Retype Password",
+  "icu": "{numPersons, plural, =0 {no persons} =1 {one person} other {# persons}}",
+  "login": "Login",
+  "sign_up": "Sign Up",
+  "password_length_matching": "You should input password with length at least 8 letters",
+  "retype_password_non_matching": "You should match password",
+  "_": "_"
+}
