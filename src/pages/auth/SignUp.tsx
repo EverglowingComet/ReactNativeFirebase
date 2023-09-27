@@ -4,19 +4,19 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  StyleSheet,
   Image,
   useColorScheme,
   View,
   Text,
   Alert,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/core';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useTranslation} from 'react-i18next';
+import {styles} from './styles';
 import {userActions} from '@src/store/actions';
 import AuthInput from '@src/components/input/AuthInput';
-import {COLOR_CORAL} from '@src/constants/colors';
 import ActionButton from '@src/components/input/ActionButton';
 const logoImage = require('@src/assets/image/logo/logo.png');
 
@@ -28,6 +28,7 @@ function SignUp(props: any): JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const navigation = useNavigation<any>();
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -51,8 +52,8 @@ function SignUp(props: any): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <View style={styles.splashContainer}>
-            <Image source={logoImage} style={styles.splashIcon} />
+          <View style={styles.authContainer}>
+            <Image source={logoImage} style={styles.appIcon} />
           </View>
           <Text style={styles.titleText}>{t('app_name')}</Text>
           <AuthInput
@@ -146,47 +147,19 @@ function SignUp(props: any): JSX.Element {
               });
             }}
           />
+          <ActionButton
+            title={t('login')}
+            style={styles.secButtonBg}
+            textStyle={styles.secButtonText}
+            onPress={() => {
+              navigation.navigate('/auth/login', {item: ''});
+            }}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  splashContainer: {
-    width: '100%',
-    height: 200,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  splashIcon: {
-    width: 100,
-    height: 100,
-  },
-  titleText: {
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
-  },
-  loginButtonBg: {
-    backgroundColor: COLOR_CORAL,
-    marginStart: 24,
-    marginEnd: 24,
-    marginTop: 60,
-    marginBottom: 200,
-    borderRadius: 20,
-  },
-  loginButtonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: '600',
-    marginStart: 12,
-    marginEnd: 12,
-    marginTop: 10,
-    marginBottom: 10,
-  },
-});
 
 function mapState(state: any) {
   const {user, loggingIn} = state.auth;
@@ -195,7 +168,7 @@ function mapState(state: any) {
 }
 
 const actionCreators = {
-  login: userActions.login,
+  register: userActions.register,
 };
 
 const connected = connect(mapState, actionCreators)(SignUp);

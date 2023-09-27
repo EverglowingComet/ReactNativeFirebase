@@ -1,4 +1,5 @@
 import React from 'react';
+import {COLOR_CORAL} from '../../constants/colors';
 import {
   View,
   GestureResponderEvent,
@@ -22,8 +23,14 @@ export default function ActionButton({
 }) {
   if (progress === true) {
     return (
-      <View style={style}>
-        <ActivityIndicator size="large" />
+      <View
+        style={{
+          marginStart: style.marginStart,
+          marginEnd: style.marginEnd,
+          marginTop: style.marginTop,
+          marginBottom: style.marginBottom,
+        }}>
+        <ActivityIndicator size="large" color={COLOR_CORAL} />
       </View>
     );
   }

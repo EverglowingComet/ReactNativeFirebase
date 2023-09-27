@@ -7,7 +7,9 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
+import {connect} from 'react-redux';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -24,10 +26,31 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {userActions} from '../store/actions/user.actions';
+import {useTranslation} from 'react-i18next';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
+
+const styles = StyleSheet.create({
+  sectionContainer: {
+    marginTop: 32,
+    paddingHorizontal: 24,
+  },
+  sectionTitle: {
+    fontSize: 24,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});
 
 function Section({children, title}: SectionProps): JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -55,7 +78,9 @@ function Section({children, title}: SectionProps): JSX.Element {
   );
 }
 
-function Home(): JSX.Element {
+function Home(props: any): JSX.Element {
+  const {logout} = props;
+  const {t} = useTranslation();
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -76,6 +101,12 @@ function Home(): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
+          <Button
+            title={t('logout')}
+            onPress={() => {
+              logout();
+            }}
+          />
           <Section title="Step One">
             Edit <Text style={styles.highlight}>App.tsx</Text> to change this
             screen and then come back to see your edits.
@@ -96,23 +127,14 @@ function Home(): JSX.Element {
   );
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+function mapToState(state: any) {
+  const {user, loggingIn} = state.auth;
+  return {user, loggingIn};
+}
 
-export default Home;
+const actionCreators = {
+  logout: userActions.logout,
+};
+
+const connected = connect(mapToState, actionCreators)(Home);
+export {connected as Home};
