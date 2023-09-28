@@ -17,6 +17,7 @@ import {COLOR_EDIT_INPUT_BORDER_COLOR, COLOR_RED} from '@src/constants/colors';
 export default function AuthInput({
   title,
   text,
+  placeholder,
   warningText,
   inputMode,
   hidePassword,
@@ -25,6 +26,7 @@ export default function AuthInput({
 }: {
   title: string;
   text: string;
+  placeholder?: string;
   warningText?: string;
   inputMode?: InputModeOptions;
   hidePassword?: boolean;
@@ -47,6 +49,7 @@ export default function AuthInput({
         <TextInput
           value={text}
           inputMode={inputMode}
+          placeholder={placeholder}
           secureTextEntry={hidePassword !== undefined ? hidePassword : false}
           style={[
             hidePassword === undefined

@@ -2,6 +2,7 @@
   "app_name": "Free Tester",
   "username": "Username",
   "email": "Email",
+  "email_placeholder": "test@email.com",
   "password": "Password",
   "input_username_prompt": "You should input valid username",
   "input_email_prompt": "You should input valid email address",

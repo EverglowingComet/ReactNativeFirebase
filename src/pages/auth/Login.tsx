@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {
@@ -15,6 +16,7 @@ import {useNavigation} from '@react-navigation/core';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useTranslation} from 'react-i18next';
 import {styles} from './styles';
+import {buttonStyles} from '@src/styles/buttons';
 import {userActions} from '@src/store/actions';
 import AuthInput from '@src/components/input/AuthInput';
 import ActionButton from '@src/components/input/ActionButton';
@@ -47,12 +49,13 @@ function Login(props: any): JSX.Element {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <View style={styles.authContainer}>
+          <View style={styles.iconContainer}>
             <Image source={logoImage} style={styles.appIcon} />
           </View>
           <Text style={styles.titleText}>{t('app_name')}</Text>
           <AuthInput
             title={t('email')}
+            placeholder={t('email_placeholder')}
             inputMode="email"
             text={email}
             onTextUpdate={text => {
@@ -61,6 +64,7 @@ function Login(props: any): JSX.Element {
           />
           <AuthInput
             title={t('password')}
+            placeholder={t('password')}
             text={password}
             hidePassword={passwordHide}
             onPressHide={() => {
@@ -70,10 +74,11 @@ function Login(props: any): JSX.Element {
               setPassword(text);
             }}
           />
+          <View style={{height: 40}} />
           <ActionButton
             title={t('login')}
-            style={styles.loginButtonBg}
-            textStyle={styles.loginButtonText}
+            style={buttonStyles.mainActionButtonBg}
+            textStyle={buttonStyles.mainActionButtonText}
             progress={loggingIn}
             onPress={() => {
               if (email.length <= 0) {
@@ -97,12 +102,13 @@ function Login(props: any): JSX.Element {
           />
           <ActionButton
             title={t('sign_up')}
-            style={styles.secButtonBg}
-            textStyle={styles.secButtonText}
+            style={buttonStyles.secondaryActionButtonBg}
+            textStyle={buttonStyles.secondaryActionButtonText}
             onPress={() => {
               navigation.navigate('/auth/sign_up', {item: ''});
             }}
           />
+          <View style={{height: 200}} />
         </View>
       </ScrollView>
     </SafeAreaView>
