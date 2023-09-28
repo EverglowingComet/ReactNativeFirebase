@@ -3,10 +3,10 @@ import auth from '@react-native-firebase/auth';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {connect} from 'react-redux';
 import Splash from '@src/pages/auth/Splash';
-import {Home} from '@src/pages/Home';
 import {Login} from '@src/pages/auth/Login';
 import {SignUp} from '@src/pages/auth/SignUp';
 import {userActions} from '@src/store/actions';
+import {HomeNavigation} from './HomeNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,7 +53,7 @@ function MainNavigation(props: any) {
       <Stack.Navigator>
         <Stack.Screen
           name="home"
-          component={Home}
+          component={HomeNavigation}
           options={{
             headerShown: false,
           }}

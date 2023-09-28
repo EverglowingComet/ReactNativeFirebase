@@ -13,5 +13,12 @@
   "logout": "Logout",
   "password_length_matching": "You should input password with length at least 8 letters",
   "retype_password_non_matching": "You should match password",
+  "gallery": "Gallery",
+  "edit_gallery": "Edit Gallery",
+  "track": "Track",
+  "live_track": "Live Track",
+  "track_details": "Track Details",
+  "profile": "Profile",
+  "edit_profile": "Edit Profile",
   "_": "_"
 }
